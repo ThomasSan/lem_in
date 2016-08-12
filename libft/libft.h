@@ -54,6 +54,7 @@ int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_itoa(int n);
 char				**ft_strsplit(char const *s, char c);
+char				**ft_split(char const *str);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strmap(char const *s, char (*f)(char));

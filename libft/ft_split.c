@@ -12,41 +12,40 @@
 
 #include "libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
-static int		count_word(const char *str, char c)
+static int		count_word(const char *s)
 {
-	int		nb;
-	int		i;
+	int i;
+	int wd;
 
-	nb = 0;
 	i = 0;
-	while (str[i])
+	wd = 0;
+	while (s[i])
 	{
-		if (str[i - 1] == c && str[i] != c)
-		{
-			nb++;
-		}
-		i++;
+		while (s[i] && ft_isspace(s[i]))
+			i++;
+		wd++;
+		while (s[i] && !ft_isspace(s[i]))
+			i++;
 	}
-	if (str[0] != c && str[0] != '\0')
-		nb++;
-	return (nb);
+	return (wd);
 }
 
-static size_t	c_stop(const char *s, int start, char c)
+static int		word_len(char const *s, int start)
 {
-	size_t	x;
+	int i;
 
-	x = 0;
-	while (s[start] && s[start] != c)
+	i = 0;
+	while (s[start] && !ft_isspace(s[start]))
 	{
 		start++;
-		x++;
+		i++;
 	}
-	return (x);
+	return (i);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char			**ft_split(char const *s)
 {
 	char	**tab;
 	int		word;
@@ -55,19 +54,18 @@ char			**ft_strsplit(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	word = count_word(s, c);
-	tab = (char **)malloc(sizeof(tab) * (word + 1));
-	if (!tab)
+	word = count_word(s);
+	if (!(tab = (char **)malloc(sizeof(char*) * (word + 1))))
 		return (NULL);
 	while (i < word)
 	{
-		while (s[j] && s[j] == c)
+		while (s[j] && ft_isspace(s[j]))
 			j++;
-		tab[i] = ft_strsub(s, j, c_stop(s, j, c));
+		tab[i] = ft_strsub(s, j, word_len(s, j));
 		i++;
-		while (s[j] && s[j] != c)
+		while (s[j] && !ft_isspace(s[j]))
 			j++;
 	}
-	tab[i] = 0;
+	tab[i] = NULL;
 	return (tab);
 }
