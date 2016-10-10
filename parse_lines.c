@@ -9,7 +9,7 @@ int		parse_ants(char *s)
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
-			return (-1);
+			return (ERROR);
 		i++;
 	}
 	return (ANTS);
@@ -17,15 +17,11 @@ int		parse_ants(char *s)
 
 int		parse_1_wd(char *s)
 {
-	// int i;
-
-	// i = 0;
 	if (ft_strcmp("##start", s) == 0)
 		return (START);
 	if (ft_strcmp("##end", s) == 0)
 		return (END);
-	// verifier les tubes
-	return (0);
+	return (3);
 }
 
 void	free_array(char **arr)
@@ -47,9 +43,7 @@ int		parse_3_wd(char *s)
 	int		i;
 
 	i = 0;
-	printf("s : %s\n", s);
 	arr = ft_split(s);
-	// printf("arr0 %s arr1 %s arr2 %s \n", arr[0], arr[1], arr[2]);
 	if (arr[0][0] == 'L')
 		return (ERROR);
 	while (arr[1][i])
@@ -67,5 +61,31 @@ int		parse_3_wd(char *s)
 	}
 	free_array(arr);
 	free(arr);
-	return (0);
+	return (ROOMS);
+}
+
+int		parse_pipes(char *s, t_rooms *head)
+{
+	int		i;
+	char	*tmp1;
+	char	*tmp2;
+
+	i = 0;
+	while (s[i]){
+		if (s[i] == '-')
+		{
+			tmp1 = ft_strsub(s, 0, i);
+			tmp2 = ft_strsub(s, i + 1, ft_strlen(s));
+			if (matching_mames(head, tmp1, tmp2))
+			{
+				free(tmp1);
+				free(tmp2);
+				return (PIPES);
+			}
+			free(tmp1);
+			free(tmp2);
+		}
+		i++;
+	}
+	return (ERROR);
 }
