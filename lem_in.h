@@ -40,6 +40,8 @@ typedef struct		s_rooms
 typedef struct 		s_shell
 {
 	int				ants;
+	int				color;
+	int				type;
 	struct s_rooms	*head;
 }					t_shell;
 

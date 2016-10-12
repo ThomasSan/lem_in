@@ -34,16 +34,22 @@ int		ants_status(t_ants *list)
 	return (0);
 }
 
-void	print_ants(t_ants *list, int turn)
+void	print_ants(t_ants *list, int turn, int color)
 {
 	while (list && list->ant <= turn)
 	{
 		if (list->status == IN)
 		{
+			if (color)
+				ft_putstr("\x1B[35m");
 			ft_putchar('L');
 			ft_putnbr(list->ant);
+			ft_putstr("\x1B[0m");
 			ft_putchar('-');
+			if (color)
+				ft_putstr("\x1B[31m");
 			ft_putstr(list->room->name);
+			ft_putstr("\x1B[0m");
 			ft_putchar(' ');
 			list->room = list->room->next;
 			if (!list->room)
@@ -73,12 +79,13 @@ void	print_path(t_shell *shell, t_links *path)
 
 	i = 0;
 	ant_list = NULL;
+	ft_putchar('\n');
 	while (i++ < shell->ants)
 		ant_list = push_ants(ant_list, i, path);
 	i = 1;
 	while (ants_status(ant_list))
 	{
-		print_ants(ant_list, i);
+		print_ants(ant_list, i, shell->color);
 		i++;
 	}
 	free_ant_list(ant_list);
