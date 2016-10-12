@@ -20,7 +20,11 @@ t_rooms		*push_back(t_rooms *head, char *name, int start, int end)
 	{
 		tmp = head;
 		while(tmp->next)
+		{
+			if (ft_strcmp(tmp->name, name) == 0)
+				my_error(3, NULL);
 			tmp = tmp->next;
+		}
 		tmp->next = new;
 	}
 	return (head);
@@ -103,18 +107,6 @@ t_links	*push_links(t_links *links, char *s)
 		tmp->next = new;
 	}
 	return (links);
-}
-
-void	free_links(t_links *links)
-{
-	t_links *tmp;
-	while (links)
-	{
-		tmp = links;
-		links = links->next;
-		free(tmp->name);
-		free(tmp);
-	}
 }
 
 void	fill_pipes(t_rooms *head, char *s)

@@ -47,7 +47,7 @@ void	print_ants(t_ants *list, int turn, int color)
 			ft_putstr("\x1B[0m");
 			ft_putchar('-');
 			if (color)
-				ft_putstr("\x1B[31m");
+				ft_putstr("\x1B[32m");
 			ft_putstr(list->room->name);
 			ft_putstr("\x1B[0m");
 			ft_putchar(' ');

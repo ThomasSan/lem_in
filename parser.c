@@ -45,39 +45,38 @@ int		ft_checkline(char *s, int type, t_rooms *head)
 t_shell	*parse_lines(t_shell *shell)
 {
 	char	*buff;
-	int		ret;
-	int		type;
 
 	buff = NULL;
-	type = ANTS;
-	ret = 0;
 	while (get_next_line(0, &buff))
 	{
 		ft_putendl(buff);
-		if (ret == START || ret == END)
+		// printf("buff : %s, ret : %d\n", buff, shell->ret);
+		if (shell->ret == START || shell->ret == END)
 		{
-			if (ft_checkline(buff, type, shell->head) == 3)
+			if (ft_checkline(buff, shell->type, shell->head) == 3)
+			{
+				free(buff);
 				continue ;
-			shell->head = fill_room(shell->head, buff, ret);
-			ret = 0;
+			}
+			shell->head = fill_room(shell->head, buff, shell->ret);
+			shell->ret = 0;
 			free(buff);
 			continue;
 		}
-		ret = ft_checkline(buff, type, shell->head);
-		// printf("buff : %s, ret : %d\n", buff, ret);
-		if (ret == ERROR)
+		shell->ret = ft_checkline(buff, shell->type, shell->head);
+		if (shell->ret == ERROR)
 			break ;
-		else if (ret == ANTS)
+		else if (shell->ret == ANTS)
 		{
 			shell->ants = ft_atoi(buff);
-			type = ROOMS;
+			shell->type = ROOMS;
 		}
-		else if (ret == ROOMS)
-			shell->head = fill_room(shell->head, buff, ret);
-		else if (ret == PIPES)
+		else if (shell->ret == ROOMS)
+			shell->head = fill_room(shell->head, buff, shell->ret);
+		else if (shell->ret == PIPES)
 		{
 			fill_pipes(shell->head, buff);
-			type = PIPES;
+			shell->type = PIPES;
 		}
 		free(buff);
 	}

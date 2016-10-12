@@ -41,7 +41,9 @@ typedef struct 		s_shell
 {
 	int				ants;
 	int				color;
+	int				path;
 	int				type;
+	int				ret;
 	struct s_rooms	*head;
 }					t_shell;
 
@@ -67,8 +69,19 @@ void				free_links(t_links *links);
 **		Ayray functions
 */
 void				free_array(char **arr);
-
-int					my_error(int x);
+/*
+**		Errors & free functions
+*/
+int					my_error(int x, t_shell *shell);
+void				free_shell_links(t_shell *shell);
+void				free_path(t_links **path);
+void				free_links(t_links *links);
+/*
+**		PathFinding functions
+*/
+t_rooms				*get_end_start(t_rooms *head, int end, int start);
+t_rooms				*a_star_finding(t_rooms *head);
 void				print_path(t_shell *shell, t_links *path);
+void				get_path(t_rooms *head, t_rooms *start, t_links *path);
 
 #endif
