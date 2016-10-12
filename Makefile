@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = lem_in
-SRC = main.c gnl.c parser.c parse_lines.c ft_lst_fn.c
+SRC = main.c gnl.c parser.c parse_lines.c ft_lst_fn.c path_resolve.c
 
 OBJ = $(SRC:%.c=obj/%.o)
 

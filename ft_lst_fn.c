@@ -105,6 +105,18 @@ t_links	*push_links(t_links *links, char *s)
 	return (links);
 }
 
+void	free_links(t_links *links)
+{
+	t_links *tmp;
+	while (links)
+	{
+		tmp = links;
+		links = links->next;
+		free(tmp->name);
+		free(tmp);
+	}
+}
+
 void	fill_pipes(t_rooms *head, char *s)
 {
 	char	*s1;

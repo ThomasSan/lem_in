@@ -7,8 +7,18 @@
 # define ANTS 100
 # define ROOMS 101
 # define PIPES 102
+# define OUT 300
+# define IN 303
 #include "libft/libft.h"
 #include <stdlib.h>
+
+typedef struct 		s_ants
+{
+	int				ant;
+	int				status;
+	struct s_links	*room;
+	struct s_ants	*next;
+}					t_ants;
 
 typedef struct 		s_links
 {
@@ -45,15 +55,18 @@ int					parse_pipes(char *s, t_rooms *head);
 /*
 **		listwise functions
 */
-t_rooms		*push_back(t_rooms *head, char *name, int start, int end);
-t_rooms 	*fill_room(t_rooms *head, char *str, int room);
-int			matching_mames(t_rooms *head, char *s1, char *s2);
-void		fill_pipes(t_rooms *head, char *s);
-t_links		*push_links(t_links *links, char *s);
+t_rooms				*push_back(t_rooms *head, char *name, int start, int end);
+t_rooms				*fill_room(t_rooms *head, char *str, int room);
+int					matching_mames(t_rooms *head, char *s1, char *s2);
+void				fill_pipes(t_rooms *head, char *s);
+t_links				*push_links(t_links *links, char *s);
+void				free_links(t_links *links);
 /*
 **		Ayray functions
 */
-void	free_array(char **arr);
+void				free_array(char **arr);
 
+int					my_error(int x);
+void				print_path(t_shell *shell, t_links *path);
 
 #endif

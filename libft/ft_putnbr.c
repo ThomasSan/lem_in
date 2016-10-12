@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 void	ft_putnbr(int n)
 {
@@ -18,4 +19,5 @@ void	ft_putnbr(int n)
 
 	s = ft_itoa(n);
 	ft_putstr(s);
+	free(s);
 }

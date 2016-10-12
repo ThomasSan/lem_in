@@ -42,17 +42,17 @@ int		parse_3_wd(char *s)
 	char	**arr;
 	int		i;
 
-	i = 0;
 	arr = ft_split(s);
 	if (arr[0][0] == 'L')
 		return (ERROR);
+	i = arr[1][0] == '-' ? 1 : 0;
 	while (arr[1][i])
 	{
 		if (!ft_isdigit(arr[1][i]))
 			return (ERROR);
 		i++;
 	}
-	i = 0;
+	i = arr[2][0] == '-' ? 1 : 0;
 	while (arr[2][i])
 	{
 		if (!ft_isdigit(arr[2][i]))

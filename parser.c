@@ -26,6 +26,7 @@ int		ft_checkline(char *s, int type, t_rooms *head)
 	if (s[0] == '#')
 		return (parse_1_wd(s));
 	wd = word_nb(s);
+	// printf("wd %d, type %d\n", wd, type);
 	if (wd > 3 || wd == 2)
 		return (ERROR);
 	if (wd == 1 && type == ANTS)
@@ -52,10 +53,14 @@ t_shell	*parse_lines(t_shell *shell)
 	ret = 0;
 	while (get_next_line(0, &buff))
 	{
+		ft_putendl(buff);
 		if (ret == START || ret == END)
 		{
+			if (ft_checkline(buff, type, shell->head) == 3)
+				continue ;
 			shell->head = fill_room(shell->head, buff, ret);
 			ret = 0;
+			free(buff);
 			continue;
 		}
 		ret = ft_checkline(buff, type, shell->head);
@@ -70,7 +75,10 @@ t_shell	*parse_lines(t_shell *shell)
 		else if (ret == ROOMS)
 			shell->head = fill_room(shell->head, buff, ret);
 		else if (ret == PIPES)
+		{
 			fill_pipes(shell->head, buff);
+			type = PIPES;
+		}
 		free(buff);
 	}
 	return (shell);
