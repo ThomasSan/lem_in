@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/23 17:55:03 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/10/23 17:55:05 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 #include <string.h>
 #include <stdlib.h>
@@ -6,20 +18,51 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+t_rooms	*push_back(t_rooms *head, char *name, int start, int end)
+{
+	t_rooms *new;
+	t_rooms *tmp;
+
+	if (!(new = (t_rooms*)malloc(sizeof(t_rooms))))
+		return (NULL);
+	new->name = ft_strdup(name);
+	new->is_start = start;
+	new->is_end = end;
+	new->weight = 0;
+	new->links = NULL;
+	new->next = NULL;
+	if (!head)
+		head = new;
+	else
+	{
+		tmp = head;
+		while (tmp->next)
+		{
+			if (ft_strcmp(tmp->name, name) == 0)
+				my_error(3, NULL);
+			tmp = tmp->next;
+		}
+		tmp->next = new;
+	}
+	return (head);
+}
 
 void	show_list(t_shell *shell)
 {
-	printf("ants : %d\n", shell->ants);
-	while(shell->head)
+	ft_putstr("ants : ");
+	ft_putnbr(shell->ants);
+	while (shell->head)
 	{
 		if (shell->head->is_start)
-			printf("start : ");
+			ft_putstr("start : ");
 		if (shell->head->is_end)
-			printf("end : ");
-		printf("name %s, cost %d\n", shell->head->name, shell->head->weight);
+			ft_putstr("end : ");
+		ft_putstr("name");
+		ft_putendl(shell->head->name);
 		while (shell->head->links)
 		{
-			printf("\tlinks %s\n", shell->head->links->name);
+			ft_putstr("\tlinks ");
+			ft_putendl(shell->head->links->name);
 			shell->head->links = shell->head->links->next;
 		}
 		shell->head = shell->head->next;
@@ -31,13 +74,14 @@ void	show_path(t_links *list)
 	ft_putchar('\n');
 	while (list)
 	{
-		printf("[PATH] -> %s", list->name);
+		ft_putstr("[PATH] -> ");
+		ft_putstr(list->name);
 		list = list->next;
 	}
-	printf("\n");
+	ft_putchar('\n');
 }
 
-t_shell *shell_init(t_shell *shell, int ac, char **av)
+t_shell	*shell_init(t_shell *shell, int ac, char **av)
 {
 	if (!(shell = (t_shell*)malloc(sizeof(t_shell))))
 		return (0);
@@ -56,7 +100,6 @@ t_shell *shell_init(t_shell *shell, int ac, char **av)
 	shell = parse_lines(shell);
 	return (shell);
 }
-
 
 int		main(int ac, char **av)
 {

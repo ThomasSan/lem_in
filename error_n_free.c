@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_n_free.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/23 17:56:59 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/10/23 17:57:00 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 #include <stdio.h>
 
 void	free_links(t_links *links)
 {
 	t_links *tmp;
+
 	while (links)
 	{
 		tmp = links;
@@ -65,8 +78,8 @@ void	free_path(t_links **path)
 
 int		my_error(int x, t_shell *shell)
 {
+	(void)x;
 	ft_putendl("\nERROR");
-	ft_putnbr(x);
 	ft_putchar('\n');
 	if (shell)
 		free_shell_links(shell);

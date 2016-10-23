@@ -1,36 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lst_fn.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/23 17:54:01 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/10/23 17:54:03 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 #include <stdio.h>
 
-t_rooms		*push_back(t_rooms *head, char *name, int start, int end)
-{
-	t_rooms *new;
-	t_rooms *tmp;
-
-	if (!(new = (t_rooms*)malloc(sizeof(t_rooms))))
-		return (NULL);
-	new->name = ft_strdup(name);
-	new->is_start = start;
-	new->is_end = end;
-	new->weight = 0;
-	new->links = NULL;
-	new->next = NULL;
-	if (!head)
-		head = new;
-	else
-	{
-		tmp = head;
-		while(tmp->next)
-		{
-			if (ft_strcmp(tmp->name, name) == 0)
-				my_error(3, NULL);
-			tmp = tmp->next;
-		}
-		tmp->next = new;
-	}
-	return (head);
-}
-
-t_rooms 	*fill_room(t_rooms *head, char *str, int room)
+t_rooms		*fill_room(t_rooms *head, char *str, int room)
 {
 	char **arr;
 
@@ -39,10 +22,13 @@ t_rooms 	*fill_room(t_rooms *head, char *str, int room)
 		head = push_back(head, arr[0], 1, 0);
 	else if (room == END)
 		head = push_back(head, arr[0], 0, 1);
-	else 
+	else
 		head = push_back(head, arr[0], 0, 0);
-	free_array(arr);
-	free(arr);
+	if (arr)
+	{
+		free_array(arr);
+		free(arr);
+	}
 	return (head);
 }
 
@@ -66,12 +52,13 @@ int			matching_mames(t_rooms *head, char *s1, char *s2)
 	return (0);
 }
 
-int		get_pipes(char *s, t_rooms *head, char **s1, char **s2)
+int			get_pipes(char *s, t_rooms *head, char **s1, char **s2)
 {
 	int		i;
 
 	i = 0;
-	while (s[i]){
+	while (s[i])
+	{
 		if (s[i] == '-')
 		{
 			*s1 = ft_strsub(s, 0, i);
@@ -88,7 +75,7 @@ int		get_pipes(char *s, t_rooms *head, char **s1, char **s2)
 	return (1);
 }
 
-t_links	*push_links(t_links *links, char *s)
+t_links		*push_links(t_links *links, char *s)
 {
 	t_links *new;
 	t_links *tmp;
@@ -109,7 +96,7 @@ t_links	*push_links(t_links *links, char *s)
 	return (links);
 }
 
-void	fill_pipes(t_rooms *head, char *s)
+void		fill_pipes(t_rooms *head, char *s)
 {
 	char	*s1;
 	char	*s2;

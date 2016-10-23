@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/23 17:51:25 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/10/23 17:51:26 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 #include <stdio.h>
 
@@ -26,7 +38,6 @@ int		ft_checkline(char *s, int type, t_rooms *head)
 	if (s[0] == '#')
 		return (parse_1_wd(s));
 	wd = word_nb(s);
-	// printf("wd %d, type %d\n", wd, type);
 	if (wd > 3 || wd == 2)
 		return (ERROR);
 	if (wd == 1 && type == ANTS)
@@ -50,8 +61,7 @@ t_shell	*parse_lines(t_shell *shell)
 	while (get_next_line(0, &buff))
 	{
 		ft_putendl(buff);
-		// printf("buff : %s, ret : %d\n", buff, shell->ret);
-		if (shell->ret == START || shell->ret == END)
+		if ((shell->ret == START || shell->ret == END) && shell->type != ANTS)
 		{
 			if (ft_checkline(buff, shell->type, shell->head) == 3)
 			{

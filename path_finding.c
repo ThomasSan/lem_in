@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_finding.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/23 17:40:57 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/10/23 17:40:59 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 t_rooms	*find_node(t_rooms *head, char *name)
@@ -34,11 +46,9 @@ int		set_weight(t_rooms *node, t_rooms *head, t_links *closed, int cost)
 	while (tmp)
 	{
 		current_node = find_node(head, tmp->name);
-		if (is_closed(closed, tmp->name) == 0 && (current_node->weight == 0 || current_node->weight > cost))
-		{
-			// printf("[DEBUG] node: %s name: %s, cost %d\n", node->name, current_node->name, cost);
+		if (is_closed(closed, tmp->name) == 0 && (current_node->weight == 0 ||
+current_node->weight > cost))
 			current_node->weight = cost;
-		}
 		tmp = tmp->next;
 	}
 	tmp = node->links;
@@ -73,18 +83,18 @@ void	get_path(t_rooms *head, t_rooms *start, t_links *path)
 	int		cost;
 	t_links *tmp;
 	t_links *save;
-	t_rooms	*current_node;
+	t_rooms	*curr;
 
 	cost = -1;
 	tmp = start->links;
 	save = NULL;
 	while (tmp)
 	{
-		current_node = find_node(head, tmp->name);
-		if ((current_node->weight <= start->weight) && is_closed(path, tmp->name) == 0)
+		curr = find_node(head, tmp->name);
+		if ((curr->weight <= start->weight) && is_closed(path, tmp->name) == 0)
 		{
 			save = tmp;
-			cost = current_node->weight < cost;
+			cost = curr->weight < cost;
 		}
 		tmp = tmp->next;
 	}

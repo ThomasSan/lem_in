@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path_resolve.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/23 17:50:55 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/10/23 17:50:56 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 t_ants	*push_ants(t_ants *ant, int i, t_links *room)
@@ -63,9 +75,10 @@ void	print_ants(t_ants *list, int turn, int color)
 void	free_ant_list(t_ants *list)
 {
 	t_ants *tmp;
+
 	while (list)
 	{
-		tmp = list;	
+		tmp = list;
 		list = list->next;
 		free(tmp->room);
 		free(tmp);

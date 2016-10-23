@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/23 17:58:48 by tsanzey           #+#    #+#             */
+/*   Updated: 2016/10/23 17:58:49 by tsanzey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
@@ -9,10 +21,10 @@
 # define PIPES 102
 # define OUT 300
 # define IN 303
-#include "libft/libft.h"
-#include <stdlib.h>
+# include "libft/libft.h"
+# include <stdlib.h>
 
-typedef struct 		s_ants
+typedef struct		s_ants
 {
 	int				ant;
 	int				status;
@@ -20,9 +32,9 @@ typedef struct 		s_ants
 	struct s_ants	*next;
 }					t_ants;
 
-typedef struct 		s_links
+typedef struct		s_links
 {
-	char			*name;	
+	char			*name;
 	struct s_links	*next;
 }					t_links;
 
@@ -33,11 +45,10 @@ typedef struct		s_rooms
 	int				is_end;
 	int				weight;
 	struct s_links	*links;
-	struct s_rooms 	*next;
+	struct s_rooms	*next;
 }					t_rooms;
 
-
-typedef struct 		s_shell
+typedef struct		s_shell
 {
 	int				ants;
 	int				color;
