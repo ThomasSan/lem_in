@@ -89,6 +89,8 @@ t_shell	*shell_init(t_shell *shell, int ac, char **av)
 	shell->color = 0;
 	shell->ret = 0;
 	shell->path = 0;
+	shell->start = 0;
+	shell->end = 0;
 	shell->type = ANTS;
 	while (--ac > 0)
 	{
@@ -97,7 +99,7 @@ t_shell	*shell_init(t_shell *shell, int ac, char **av)
 		if (ft_strcmp(av[ac], "-p") == 0)
 			shell->path = 1;
 	}
-	shell = parse_lines(shell);
+	shell = parse_lines(shell, NULL);
 	return (shell);
 }
 

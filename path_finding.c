@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "lem_in.h"
+#include <stdio.h>
 
 t_rooms	*find_node(t_rooms *head, char *name)
 {
@@ -100,9 +101,11 @@ void	get_path(t_rooms *head, t_rooms *start, t_links *path)
 	}
 	if (start == get_end_start(head, 1, 0))
 		return ;
-	if (start != get_end_start(head, 1, 0))
-	{
-		path = push_links(path, save->name);
-		get_path(head, find_node(head, save->name), path);
-	}
+	if (save == NULL)
+		my_error(0, NULL);
+	// if (start != get_end_start(head, 1, 0))
+	// {
+	path = push_links(path, save->name);
+	get_path(head, find_node(head, save->name), path);
+	// }
 }

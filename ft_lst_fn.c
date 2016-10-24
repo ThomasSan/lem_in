@@ -13,15 +13,21 @@
 #include "lem_in.h"
 #include <stdio.h>
 
-t_rooms		*fill_room(t_rooms *head, char *str, int room)
+t_rooms		*fill_room(t_rooms *head, char *str, t_shell *shell)
 {
 	char **arr;
 
 	arr = ft_split(str);
-	if (room == START)
+	if (shell->ret == START)
+	{
+		shell->start = 1;
 		head = push_back(head, arr[0], 1, 0);
-	else if (room == END)
+	}
+	else if (shell->ret == END)
+	{
+		shell->end = 1;
 		head = push_back(head, arr[0], 0, 1);
+	}
 	else
 		head = push_back(head, arr[0], 0, 0);
 	if (arr)

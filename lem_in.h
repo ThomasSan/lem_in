@@ -55,6 +55,8 @@ typedef struct		s_shell
 	int				path;
 	int				type;
 	int				ret;
+	int				start;
+	int				end;
 	struct s_rooms	*head;
 }					t_shell;
 
@@ -62,7 +64,7 @@ int					get_next_line(int fd, char **line);
 /*
 **		parsing functions
 */
-t_shell				*parse_lines(t_shell *shell);
+t_shell				*parse_lines(t_shell *shell, char *buff);
 int					parse_ants(char *s);
 int					parse_1_wd(char *s);
 int					parse_3_wd(char *s);
@@ -71,7 +73,7 @@ int					parse_pipes(char *s, t_rooms *head);
 **		listwise functions
 */
 t_rooms				*push_back(t_rooms *head, char *name, int start, int end);
-t_rooms				*fill_room(t_rooms *head, char *str, int room);
+t_rooms				*fill_room(t_rooms *head, char *str, t_shell *sh);
 int					matching_mames(t_rooms *head, char *s1, char *s2);
 void				fill_pipes(t_rooms *head, char *s);
 t_links				*push_links(t_links *links, char *s);
@@ -80,6 +82,7 @@ void				free_links(t_links *links);
 **		Ayray functions
 */
 void				free_array(char **arr);
+void				show_path(t_links *list);
 /*
 **		Errors & free functions
 */
