@@ -56,18 +56,12 @@ int		ft_checkline(char *s, int type, t_rooms *head)
 int		parsing_start_end(t_shell *shell, char *buff)
 {
 	if (ft_checkline(buff, shell->type, shell->head) == 3)
-	{
-		free(buff);
 		return (3);
-	}
 	if (ft_checkline(buff, shell->type, shell->head) != ROOMS)
 		return (2);
 	if ((shell->start == 1 && shell->ret == START) ||
 (shell->end == 1 && shell->ret == END))
-	{
-		free(buff);
 		return (2);
-	}
 	return (1);
 }
 
