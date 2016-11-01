@@ -6,7 +6,7 @@
 /*   By: tsanzey <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 17:40:57 by tsanzey           #+#    #+#             */
-/*   Updated: 2016/10/23 17:40:59 by tsanzey          ###   ########.fr       */
+/*   Updated: 2016/11/01 14:54:18 by tsanzey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ void	get_path(t_rooms *head, t_rooms *start, t_links *path)
 		return ;
 	if (save == NULL)
 		my_error(0, NULL);
-	// if (start != get_end_start(head, 1, 0))
-	// {
 	path = push_links(path, save->name);
 	get_path(head, find_node(head, save->name), path);
-	// }
 }

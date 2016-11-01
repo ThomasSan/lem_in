@@ -61,11 +61,9 @@ int		parsing_start_end(t_shell *shell, char *buff)
 		return (3);
 	}
 	if (ft_checkline(buff, shell->type, shell->head) != ROOMS)
-	{
-		free(buff);
 		return (2);
-	}
-	if ((shell->start == 1 && shell->ret == START) || (shell->end == 1 && shell->ret == END))
+	if ((shell->start == 1 && shell->ret == START) ||
+(shell->end == 1 && shell->ret == END))
 	{
 		free(buff);
 		return (2);
@@ -76,17 +74,17 @@ int		parsing_start_end(t_shell *shell, char *buff)
 t_shell	*fill_shell(t_shell *shell, char *buff)
 {
 	if (shell->ret == ANTS)
-		{
-			shell->ants = ft_atoi(buff);
-			shell->type = ROOMS;
-		}
-		else if (shell->ret == ROOMS)
-			shell->head = fill_room(shell->head, buff, shell);
-		else if (shell->ret == PIPES)
-		{
-			fill_pipes(shell->head, buff);
-			shell->type = PIPES;
-		}
+	{
+		shell->ants = ft_atoi(buff);
+		shell->type = ROOMS;
+	}
+	else if (shell->ret == ROOMS)
+		shell->head = fill_room(shell->head, buff, shell);
+	else if (shell->ret == PIPES)
+	{
+		fill_pipes(shell->head, buff);
+		shell->type = PIPES;
+	}
 	return (shell);
 }
 
@@ -95,7 +93,6 @@ t_shell	*parse_lines(t_shell *shell, char *buff)
 	while (get_next_line(0, &buff))
 	{
 		ft_putendl(buff);
-		printf("Buff : %s, ret : %d, type : %d\n", buff, shell->ret, shell->type);
 		if ((shell->ret == START || shell->ret == END) && shell->type != ANTS)
 		{
 			if (parsing_start_end(shell, buff) == 3)
